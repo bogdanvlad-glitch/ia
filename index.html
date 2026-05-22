@@ -1,1 +1,42 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LeadPilot AI</title>
+  <link rel="stylesheet" href="./public/style.css">
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <p class="eyebrow">Assistant IA commercial</p>
+      <h1>LeadPilot AI</h1>
+      <p class="subtitle">La page GitHub Pages est maintenant visible. Pour utiliser le vrai chat IA, il faut lancer ou deployer le serveur Node.js, car GitHub Pages ne peut pas executer server.js.</p>
+      <div class="status"><span class="dot"></span> Interface disponible</div>
+    </section>
 
+    <section class="chat-card">
+      <div class="messages">
+        <div class="message bot">
+          <strong>LeadPilot AI</strong>
+          <p>Cette version GitHub Pages est une page statique. Le backend OpenAI doit etre deploye sur Render, Railway, Fly.io ou un VPS.</p>
+        </div>
+        <div class="message user">
+          <strong>Toi</strong>
+          <p>Pourquoi le chat ne repond pas ici ?</p>
+        </div>
+        <div class="message bot">
+          <strong>LeadPilot AI</strong>
+          <p>Parce que GitHub Pages ne lance pas Node.js. En local, utilise npm install puis npm start. En production, deploie le backend et connecte le site a son URL.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <article><h2>Local</h2><p>Lance npm install puis npm start et ouvre http://localhost:3000.</p></article>
+      <article><h2>Production</h2><p>Deploie server.js sur Render, Railway ou un autre hebergeur Node.js.</p></article>
+      <article><h2>Securite</h2><p>Ne mets jamais ta cle OpenAI dans du JavaScript public.</p></article>
+    </section>
+  </main>
+</body>
+</html>
