@@ -6,13 +6,15 @@ import OpenAI from "openai";
 const app = express();
 const port = process.env.PORT || 3000;
 
-if (!process.env.OPENAI_API_KEY) {
-  console.warn("Attention: OPENAI_API_KEY est manquante. Ajoute-la dans un fichier .env.");
-}
+function getOpenAIClient() {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error("OPENAI_API_KEY est manquante. Ajoute-la dans ton fichier .env.");
+  }
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+  return new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+}
 
 app.use(cors());
 app.use(express.json());
@@ -88,6 +90,8 @@ app.post("/chat", async (req, res) => {
       return res.status(400).json({ error: "Le champ 'message' est obligatoire." });
     }
 
+    const client = getOpenAIClient();
+
     const response = await client.responses.create({
       model: process.env.OPENAI_MODEL || "gpt-4.1-mini",
       input: buildConversation(message, history),
@@ -96,9 +100,9 @@ app.post("/chat", async (req, res) => {
 
     res.json({ reply: response.output_text });
   } catch (error) {
-    console.error("Erreur OpenAI:", error);
+    console.error("Erreur:", error);
     res.status(500).json({
-      error: "Impossible de generer une reponse pour le moment.",
+      error: error.message || "Impossible de generer une reponse pour le moment.",
     });
   }
 });
