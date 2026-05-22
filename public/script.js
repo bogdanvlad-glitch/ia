@@ -2,6 +2,7 @@ const form = document.getElementById("chatForm");
 const input = document.getElementById("messageInput");
 const messages = document.getElementById("messages");
 
+const API_BASE_URL = window.LEADPILOT_API_URL || "";
 const history = [];
 
 function addMessage(text, type) {
@@ -39,7 +40,7 @@ form.addEventListener("submit", async (event) => {
   setLoading(true);
 
   try {
-    const response = await fetch("/chat", {
+    const response = await fetch(`${API_BASE_URL}/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +60,7 @@ form.addEventListener("submit", async (event) => {
     addMessage(data.reply, "bot");
     history.push({ role: "assistant", content: data.reply });
   } catch (error) {
-    addMessage("Erreur: impossible de contacter l'IA. Verifie le serveur et la cle API.", "bot");
+    addMessage("Erreur: impossible de contacter l'IA. Verifie le serveur, l'URL API et la cle OpenAI.", "bot");
     console.error(error);
   } finally {
     setLoading(false);
